@@ -475,6 +475,7 @@ if __name__ == '__main__':
     else:
         model = get_hfmodel(args.model, args.dtype)
     
+    model.to(device)
     if getattr(model.config, 'max_position_embeddings', None):
         args.seqlen = model.config.max_position_embeddings
     elif getattr(model.config, 'max_sequence_length', None):
