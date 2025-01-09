@@ -70,8 +70,8 @@ class GPTQ_OWQ:
         H_diag = torch.diag(H)
         if frob_norm is not None:
             H_diag *= frob_norm
-        descending_ids = torch.argsort(H_diag, descending=True)
-        
+        #descending_ids = torch.argsort(H_diag, descending=True)
+        descending_ids = torch.randperm(H_diag.size(0),device=self.dev)
         temp_mask[descending_ids[:self.n_out]] = False
         if actorder:
             ids = torch.cat([descending_ids[self.n_out:],descending_ids[:self.n_out]])
